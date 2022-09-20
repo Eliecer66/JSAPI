@@ -66,9 +66,6 @@ function clickHandle (event) {
         
         let element = document.getElementById('message');
         element.innerHTML = `<p>${data.overview}</p>`;
-        
-        console.log(data);
-        
     });
 }
 
