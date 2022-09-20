@@ -1,0 +1,79 @@
+
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+#firstSection {
+    margin: 0 auto;
+}
+
+.pageHeader {
+    display: flex;
+    background:#000080;
+}
+
+#options {
+    padding: 37px 24px 0px 0px ;
+    flex-basis: 75%;
+}
+
+.optionsList {
+    display: flex;
+    justify-content: end;
+    list-style: none;
+}
+
+.idiom, .singIn {
+    margin: 10px;
+}
+
+#logo {
+    flex-basis: 25%;
+    padding: 30px;
+}
+
+.pathLogo {
+    margin: 10px;
+}
+
+#middleBox {
+    padding: 100px;
+    position: relative;
+}
+
+#message {
+    display:flex;
+    justify-content: center;
+    padding: 30px;
+}
+
+#boxContent {
+    padding: 5px;
+    background-color: #000080;
+}
+#bar {
+    padding: 10px;
+    font-size: 20px;
+    width: 90%;
+}
+
+#btn {
+    padding: 10px 20px;
+    font-size: 19px;
+
+}
+
+#idiomMenu {
+    background: transparent;
+    font-size: 16px;
+}
+
+#pictures {
+    position: absolute;
+    z-index: -1;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+}

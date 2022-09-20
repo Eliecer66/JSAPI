@@ -1,0 +1,15 @@
+{
+    "name": "js-api",
+    "version": "1.0.0",
+    "description": "Vanilla js connection with api",
+    "main": "index.js",
+    "scripts": {
+        "start": "node server.js",
+        "live": "nodemon --watch index.html --watch index.css --watch index.js server.js"
+    },
+    "author": "Jorge Acosta",
+    "license": "ISC",
+    "devDependencies": {
+        "nodemon": "^2.0.19"
+    }
+}
