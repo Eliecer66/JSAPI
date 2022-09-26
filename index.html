@@ -2,45 +2,58 @@
 <html>
   <head>
     <link rel="stylesheet" type="text/css" href="index.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lato&display=swap" rel="stylesheet"> 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   </head>
   <body>
     <section id="firstSection">
       <header class="pageHeader">
-        <div id="logo">
-          <img src="https://www.themoviedb.org/assets/2/v4/logos/v2/blue_short-8e7b30f73a4020692ccca9c88bafe5dcb6f8a62a4c6bc55cd9ba82bb2cd95f6c.svg" alt="movieLogo">
-        </div>
-        <div id="options">
-          <ul class="optionsList">
-            <li class="idiom">
+        <div id="firstContainer" class="container">
+          <div id="logo">
+            <img src="https://www.themoviedb.org/assets/2/v4/logos/v2/blue_short-8e7b30f73a4020692ccca9c88bafe5dcb6f8a62a4c6bc55cd9ba82bb2cd95f6c.svg" alt="movieLogo">
+          </div>
+          <div id="options">
+            <ul class="optionsList">
+              <li class="idiom">
               <div class="menu">
                 <select name="" id="idiomMenu">
                   <option value="0">Spanish</option>
                   <option value="1">English</option>
                 </select>
               </div>
-            </li>
-            <li class="singIn">Sing in</li>
-          </ul>
+              </li>
+              <li class="singIn">Sing in</li>
+            </ul>
+          </div>
         </div>
       </header>
-      <div id="pictures"></div>
-      <div id="middleBox">
-        <div id="boxContent">
-            <div id="message">
-              Message to the costumer
+      <!-- Middle box -->
+      <div id="middleBox" class="container">
+        <div id="pictures">
+          <div id="boxContent">
+              <div id="message">
+                <h2>
+                  Welcome
+                </h2>
+                <p>
+                    Millions of movies, series and TV shows to be discoverer. Explore now.
+                </p>
+              </div>
+          </div>
+          <div id="boxContent">
+            <div id="searchBar">
+              <form id="form" action="/search" accept-charset="utf-8">
+                <input id="bar" type="text" placeholder="Type movie's name...">
+                <input type="submit" id="btn" value ="Search">
+              </form> 
+              <div id="element"></div>
             </div>
-        </div>
-        <div id="boxContent">
-          <div id="searchBar">
-            <form id="form" action="/search" accept-charset="utf-8">
-              <input id="bar" type="text" placeholder="Search">
-              <input type="submit" id="btn" onClick="goSearch()" value ="Search">
-            </form> 
-            <div id="element"></div>
           </div>
         </div>
       </div>
+      <div id="results"></div>
     </section>
     <script src="index.js"></script>
   </body>

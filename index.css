@@ -1,79 +1,119 @@
-
 * {
     padding: 0;
     margin: 0;
     box-sizing: border-box;
 }
-#firstSection {
-    margin: 0 auto;
+
+body {
+    font-size: 15px;
+    font-family: Lato;
 }
 
+/* Header styles */
+
 .pageHeader {
+    background:#0B173B ;
+}
+
+.container {
+    margin: 0 auto;
+    max-width: 1400px;
+}
+
+#firstContainer {
     display: flex;
-    background:#000080;
+    padding: 11px 50px;
+}
+
+#logo {
+    flex-basis: 20%;
+    padding: 8px;
 }
 
 #options {
-    padding: 37px 24px 0px 0px ;
-    flex-basis: 75%;
+    padding: 2px 11px 1px 0px ;
+    flex-basis: 80%;
 }
 
 .optionsList {
     display: flex;
+    color: #FAFAFA;
     justify-content: end;
     list-style: none;
+}
+
+#idiomMenu {
+    background: transparent;
+    font-size: 16px;
+    color: #FAFAFA;
 }
 
 .idiom, .singIn {
     margin: 10px;
 }
 
-#logo {
-    flex-basis: 25%;
-    padding: 30px;
-}
-
-.pathLogo {
-    margin: 10px;
-}
+/* Middle box */
 
 #middleBox {
-    padding: 100px;
     position: relative;
 }
 
-#message {
-    display:flex;
-    justify-content: center;
-    padding: 30px;
+#boxContent {
+    background: rgba(0, 0, 0, 0.781);
+    padding: 10px;
 }
 
-#boxContent {
-    padding: 5px;
-    background-color: #000080;
+#pictures {
+    background-size: cover;
+    padding:  60px 0px;
 }
+
+
+#message {
+    padding: 40px;
+    color: #FAFAFA;
+    font-size: 2em;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap:wrap ;
+}
+
+#message h2 {
+    width: 90%;
+}
+
+
 #bar {
+    margin: 0px 0px 10px 31px;
+    border-radius: 12px;
     padding: 10px;
     font-size: 20px;
-    width: 90%;
+    width: 83%;
+}
+
+#bar:hover {
+    border-color: #2196F3;
+}
+
+#btn:hover {
+    cursor: pointer;
+    background-color: #0B173B;
+    color: #FAFAFA;
+    transition:  1s;
 }
 
 #btn {
     padding: 10px 20px;
     font-size: 19px;
-
+    border-radius: 13px;
+    border-color: #0B173B;
+    font-weight: 500;
 }
 
-#idiomMenu {
-    background: transparent;
-    font-size: 16px;
-}
-
-#pictures {
-    position: absolute;
-    z-index: -1;
-    overflow: hidden;
+#results {
     display: flex;
-    justify-content: center;
-    align-items: flex-start;
+    gap: 15px;
+    flex-wrap: wrap;
+    margin: 0 auto;
+    max-width: 700px;
 }

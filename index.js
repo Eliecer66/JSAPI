@@ -11,8 +11,8 @@ function getRandomInt(max) {
 }
 
 inputBar.addEventListener('submit', function(e) {
+
     e.preventDefault();
-    
     let name = inputBar[0].value;
     const nameCleaned = name.replace(/\s/g, '+');
     let search = pathMovie+nameCleaned;
@@ -21,22 +21,30 @@ inputBar.addEventListener('submit', function(e) {
     fetch(search)
     .then(response => response.json())
     .then((data => {
-        let id = data.results[0].id;
-        let result = collection+id;
-        window.location = result;
+        console.log(data);
+        renderResults(data.results);
     }))
-
     inputBar.reset();
-    
 
 })
 
- function goSearch() { 
-    
+ const renderResults = function(data) {
 
+    const resultsDiv = document.getElementById('results');
+    data.forEach(element => {
+        const itemCard = document.createElement('div');
+        itemCard.classList.add('movie');
+        itemCard.innerHTML = `
+            <span>${element.title}</span>
+            <span>${element.overview}</span>
+        `;
+        resultsDiv.appendChild(itemCard);
+        console.log(element.title);
+    })
  };
 
 const updatedBackground = function() {
+
     fetch(latestRelease)
     .then(response => response.json())
     .then((data) => {
@@ -44,8 +52,7 @@ const updatedBackground = function() {
         let result = data.results[randomNumber].poster_path;
         let ultimatePath = path+result;
         let element = document.getElementById('pictures');
-        element.innerHTML = `<img src="${ultimatePath}"/>`;
-
+        element.style.backgroundImage = "url("+ ultimatePath +")";
     } )
 }();
  
@@ -68,4 +75,3 @@ function clickHandle (event) {
         element.innerHTML = `<p>${data.overview}</p>`;
     });
 }
-
