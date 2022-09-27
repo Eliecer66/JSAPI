@@ -16,12 +16,10 @@ inputBar.addEventListener('submit', function(e) {
     let name = inputBar[0].value;
     const nameCleaned = name.replace(/\s/g, '+');
     let search = pathMovie+nameCleaned;
-    console.log(search);
 
     fetch(search)
     .then(response => response.json())
     .then((data => {
-        console.log(data);
         renderResults(data.results);
     }))
     inputBar.reset();
@@ -39,7 +37,6 @@ inputBar.addEventListener('submit', function(e) {
             <span>${element.overview}</span>
         `;
         resultsDiv.appendChild(itemCard);
-        console.log(element.title);
     })
  };
 
@@ -50,9 +47,9 @@ const updatedBackground = function() {
     .then((data) => {
         let randomNumber = getRandomInt(data.results.length);
         let result = data.results[randomNumber].poster_path;
-        let ultimatePath = path+result;
+        let imageUrl = path+result;
         let element = document.getElementById('pictures');
-        element.style.backgroundImage = "url("+ ultimatePath +")";
+        element.style.backgroundImage = "url("+ imageUrl +")";
     } )
 }();
  
@@ -60,9 +57,9 @@ const pageLogo = function() {
     fetch(logo)
     .then(response => response.json())
     .then((data) => {
-        let ultimatePath = path+data.belongs_to_collection.poster_path;
+        let imageUrl = path+data.belongs_to_collection.poster_path;
         let updateLogo = document.getElementById('element');
-        updateLogo.innerHTML = `<img src="${ultimatePath}"/>`
+        updateLogo.innerHTML = `<img src="${imageUrl}"/>`
     })
 };
 
