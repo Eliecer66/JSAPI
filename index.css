@@ -108,10 +108,66 @@ body {
     font-weight: 500;
 }
 
-#results {
+/* Here goes the styles for the top movies */
+
+#containerTopMovies {
+    color: #000000;
+    padding: 50px 30px;
+}
+
+#titleContainer {
+    font-size: 1.5em;
+}
+
+#listContainer {
     display: flex;
+    justify-content: space-between;
+}
+
+.movieCard {
+    flex-direction: column;
+    width: fit-content;
+    height: auto;
+    margin: 30px 5px 15px 6px;
+    padding: 5px;
+}
+
+.image {
+    border-style: solid;
+    border-color: transparent;
+    border-radius: 15px;
+    padding: 117px 80px;
+    width: max-content;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.description {
+    max-width: 150px;
+    margin: 10px;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    align-items: center;
+}
+
+.scoreBox {
+    background-color: #2196F3 ;
+    padding: 9px;
+    margin: 5px;
+    border-radius: 17%;
+}
+
+/* Here goes the styles for the responses of the search */
+
+#containerResults {
+    display:none;
+    background-color: #0B173B;
+    padding: 100px;
+    color: #FAFAFA;
     gap: 15px;
     flex-wrap: wrap;
     margin: 0 auto;
     max-width: 1400px;
 }
+
