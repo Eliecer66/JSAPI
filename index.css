@@ -112,7 +112,7 @@ body {
 
 #containerTopMovies {
     color: #000000;
-    padding: 50px 30px;
+    padding: 50px 25px;
 }
 
 #titleContainer {
@@ -122,6 +122,7 @@ body {
 #listContainer {
     display: flex;
     justify-content: space-between;
+    overflow: scroll;
 }
 
 .movieCard {
