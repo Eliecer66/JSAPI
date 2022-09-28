@@ -11,41 +11,45 @@ function getRandomInt(max) {
 }
 
 inputBar.addEventListener('submit', function(e) {
+
     e.preventDefault();
-    
     let name = inputBar[0].value;
     const nameCleaned = name.replace(/\s/g, '+');
     let search = pathMovie+nameCleaned;
-    console.log(search);
 
     fetch(search)
     .then(response => response.json())
     .then((data => {
-        let id = data.results[0].id;
-        let result = collection+id;
-        window.location = result;
+        renderResults(data.results);
     }))
-
     inputBar.reset();
-    
 
 })
 
- function goSearch() { 
-    
+ const renderResults = function(data) {
 
+    const resultsDiv = document.getElementById('results');
+    data.forEach(element => {
+        const itemCard = document.createElement('div');
+        itemCard.classList.add('movie');
+        itemCard.innerHTML = `
+            <span>${element.title}</span>
+            <span>${element.overview}</span>
+        `;
+        resultsDiv.appendChild(itemCard);
+    })
  };
 
 const updatedBackground = function() {
+
     fetch(latestRelease)
     .then(response => response.json())
     .then((data) => {
         let randomNumber = getRandomInt(data.results.length);
         let result = data.results[randomNumber].poster_path;
-        let ultimatePath = path+result;
+        let imageUrl = path+result;
         let element = document.getElementById('pictures');
-        element.innerHTML = `<img src="${ultimatePath}"/>`;
-
+        element.style.backgroundImage = "url("+ imageUrl +")";
     } )
 }();
  
@@ -53,9 +57,9 @@ const pageLogo = function() {
     fetch(logo)
     .then(response => response.json())
     .then((data) => {
-        let ultimatePath = path+data.belongs_to_collection.poster_path;
+        let imageUrl = path+data.belongs_to_collection.poster_path;
         let updateLogo = document.getElementById('element');
-        updateLogo.innerHTML = `<img src="${ultimatePath}"/>`
+        updateLogo.innerHTML = `<img src="${imageUrl}"/>`
     })
 };
 
@@ -66,9 +70,5 @@ function clickHandle (event) {
         
         let element = document.getElementById('message');
         element.innerHTML = `<p>${data.overview}</p>`;
-        
-        console.log(data);
-        
     });
 }
-
