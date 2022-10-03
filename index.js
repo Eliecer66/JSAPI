@@ -4,7 +4,7 @@ const path = 'https://image.tmdb.org/t/p/w1920_and_h600_multi_faces';
 const imageCardPath = 'https://image.tmdb.org/t/p/w185';
 const latestDayRelease = 'https://api.themoviedb.org/3/trending/all/day?api_key=7c4a986b16b3b892bd7111a358d63e05&language=en-US&page=1';
 const trendingSeries = ' https://api.themoviedb.org/3/trending/tv/week?api_key=7c4a986b16b3b892bd7111a358d63e05&language=en-US&page=1';
-const latestWeekRelease = ' https://api.themoviedb.org/3/trending/all/week?api_key=7c4a986b16b3b892bd7111a358d63e05&language=en-US&page=2';
+const latestWeekRelease = ' https://api.themoviedb.org/3/trending/all/week?api_key=7c4a986b16b3b892bd7111a358d63e05&language=en-US&page=1';
 const pathMovie = 'https://api.themoviedb.org/3/search/movie?api_key=7c4a986b16b3b892bd7111a358d63e05&query=';
 const inputBar = document.getElementById('form');
 const posterPath = 'https://image.tmdb.org/t/p/w94_and_h141_bestv2';
@@ -26,23 +26,19 @@ function getRandomInt(max) {
 inputBar.addEventListener('submit', function(e) {
 
     e.preventDefault();
-    let name = inputBar[0].value;
+    const name = inputBar[0].value;
     const nameCleaned = name.replace(/\s/g, '+');
-    let search = pathMovie+nameCleaned;
+    const search = pathMovie+nameCleaned;
 
     fetch(search)
     .then(response => response.json())
     .then((data => {
 
-        if (data.results.length !== 0) {
-
-            renderResults(data.results, name);
-        } else {
-
-            renderMessage();
-        }
-    }))
-
+        if (data.results.length) {
+            return renderResults(data.results, name);
+        } 
+        renderMessage();
+    })) 
     inputBar.reset();
 });
 
@@ -64,7 +60,6 @@ const renderResults = function(data, name) {
 
     data.forEach(element => {
 
-        console.log(element);
         const urlPath = element.poster_path;
         const posterUrl = posterPath+urlPath;
         const itemCard = document.createElement('div');
@@ -80,9 +75,9 @@ const renderResults = function(data, name) {
                 <div class="overview"> ${element.overview}</div>
             </div>
         `;
+
         itemCard.children[0].style.backgroundImage = "url("+ posterUrl +")";
         const bar = document.getElementById('bar');
-        console.log(bar);
         bar.placeholder = name;
         resultsDiv.appendChild(itemCard);
     })
@@ -115,7 +110,7 @@ const pageLogo = function() {
 };
 
 // This function renders the cards that are going to be show in the page.
-const renderCards = function(data, divElement) {
+const renderMoviesCards = function(data, divElement) {
     
     const divContainer = document.getElementById(divElement);
     divContainer.innerHTML = ' ';
@@ -132,7 +127,7 @@ const renderCards = function(data, divElement) {
         itemCard.classList.add('movieCard');
 
         itemCard.innerHTML =  `
-            <div class="image"></div>
+            <img src="" class="image"></img>
             <div class="description">
                 <p class="movieName">${nameInfo}</p>
                 <p class="releaseInfo">${releaseInfo}</p>
@@ -140,7 +135,8 @@ const renderCards = function(data, divElement) {
             </div>
         `;
 
-        itemCard.children[0].style.backgroundImage = "url("+ imageUrl +")";
+        itemCard.children[0].src = imageUrl;
+        // itemCard.children[0].style.backgroundImage = "url("+ imageUrl +")";
         divContainer.appendChild(itemCard);
     
         const box = itemCard.children[1].children[2];
@@ -155,7 +151,7 @@ const renderTopMovies = function(latestDayRelease, divElement) {
     fetch(latestDayRelease)
     .then(response => response.json())
     .then((data) => {
-        renderCards(data.results, divElement);
+        renderMoviesCards(data.results, divElement);
     });
 };
 
@@ -185,13 +181,13 @@ function paintBoxScore(value, element) {
 }
 
 // This function can change the status of the topMovies list
-
 const newSelected = function(selected) {
 
     const element = document.getElementById('selector');
     const optionsA = document.getElementById('firstOption');
     const optionsB = document.getElementById('secondOption');
-    
+    const react = element.getBoundingClientRect();
+    console.log(react.x);
     if (selected === 'b') {
 
         renderTopMovies(latestWeekRelease, 'listContainer');
