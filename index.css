@@ -12,7 +12,7 @@ body {
 /* Header styles */
 
 .pageHeader {
-    background:#0B173B ;
+    background: #0B173B ;
 }
 
 .container {
@@ -48,7 +48,8 @@ body {
     color: #FAFAFA;
 }
 
-.language, .singIn {
+.language,
+.singIn {
     margin: 10px;
 }
 
@@ -115,7 +116,7 @@ body {
     padding: 50px 25px;
 }
 
-#titleContainer {
+.titleContainer {
     font-size: 1.5em;
 }
 
@@ -134,10 +135,8 @@ body {
 }
 
 .image {
-    border-style: solid;
-    border-color: transparent;
     border-radius: 15px;
-    padding: 117px 80px;
+    padding: 10px;
     width: max-content;
     background-repeat: no-repeat;
     background-size: cover;
@@ -162,7 +161,7 @@ body {
 /* Here goes the styles for the responses of the search */
 
 #containerResults {
-    display:none;
+    display: none;
     background-color: #0B173B;
     padding: 100px;
     color: #FAFAFA;

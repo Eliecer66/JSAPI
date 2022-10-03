@@ -55,10 +55,10 @@ const updatedBackground = function() {
     fetch(latestRelease)
     .then(response => response.json())
     .then((data) => {
-        let randomNumber = getRandomInt(data.results.length);
-        let result = data.results[randomNumber].poster_path;
-        let imageUrl = path+result;
-        let element = document.getElementById('pictures');
+        const randomNumber = getRandomInt(data.results.length);
+        const result = data.results[randomNumber].poster_path;
+        const imageUrl = path+result;
+        const element = document.getElementById('pictures');
         element.style.backgroundImage = "url("+ imageUrl +")";
     } )
 }();
@@ -67,8 +67,8 @@ const pageLogo = function() {
     fetch(logo)
     .then(response => response.json())
     .then((data) => {
-        let imageUrl = path+data.belongs_to_collection.poster_path;
-        let updateLogo = document.getElementById('element');
+        const imageUrl = path+data.belongs_to_collection.poster_path;
+        const updateLogo = document.getElementById('element');
         updateLogo.innerHTML = `<img src="${imageUrl}"/>`
     })
 };
@@ -84,7 +84,7 @@ function clickHandle (event) {
 }
 
 // This function renders the cards that are going to be show in the page.
-const renderCards = function(data) {
+const renderMoviesCards = function(data) {
     
     const divContainer = document.getElementById('listContainer');
     
@@ -100,7 +100,7 @@ const renderCards = function(data) {
         itemCard.classList.add('movieCard');
 
         itemCard.innerHTML =  `
-            <div class="image"></div>
+            <img src= "" class="image"></img>
             <div class="description">
                 <p class="movieName">${nameInfo}</p>
                 <p class="releaseInfo">${releaseInfo}</p>
@@ -108,7 +108,7 @@ const renderCards = function(data) {
             </div>
         `;
 
-        itemCard.children[0].style.backgroundImage = "url("+ imageUrl +")";
+        itemCard.children[0].src = imageUrl;
         divContainer.appendChild(itemCard);
     
         const box = itemCard.children[1].children[2];
@@ -122,8 +122,7 @@ const renderTopMovies = function() {
     fetch(latestRelease)
     .then(response => response.json())
     .then((data) => {
-        console.log(data);
-        renderCards(data.results);
+        renderMoviesCards(data.results);
     });
 }();
 
