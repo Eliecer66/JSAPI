@@ -54,7 +54,7 @@
         </div>
       </div>
       <!-- Results of the search -->
-      <div id="containerResults" class="container"></div>
+      <div id="containerResults" class="hideBox" class="container"></div>
       <!-- Top movies  -->
       <div id="containerTopMovies" class="container">
         <div class="titleContainer">
@@ -62,12 +62,12 @@
           <!-- Here goes the containers for the options of what kind of top the user wants to see -->
           <div class="optionsTopRender">
             <div class="options">
-              <a id="firstOption" class="option" href="javaScript:newSelected('a')">Today</a>
+              <a id="firstOption" class="option firstOptionMove" href="javaScript:newSelected('a')">Today</a>
             </div>
             <div class="options">
-              <a id="secondOption" class="option" href="javaScript:newSelected('b')">This week</a>
+              <a id="secondOption" class="option secondOptionMove" href="javaScript:newSelected('b')">This week</a>
             </div>
-            <div id="selector"></div>
+            <div id="selector" class="selectorMove"></div>
           </div>
         </div>
         <!-- Here goes a list of 20 cards loaded in the execution time -->
