@@ -8,17 +8,62 @@ const latestWeekRelease = ' https://api.themoviedb.org/3/trending/all/week?api_k
 const pathMovie = 'https://api.themoviedb.org/3/search/movie?api_key=7c4a986b16b3b892bd7111a358d63e05&query=';
 const inputBar = document.getElementById('form');
 const resultsDiv = document.getElementById('containerResults');
-const posterPath = 'https://image.tmdb.org/t/p/w94_and_h141_bestv2';
+const posterPath = 'https://image.tmdb.org/t/p/w154';
 const collection = 'https://www.themoviedb.org/collection/';
 const highScore = 70;
 const regularScore = 50;
+const SEARCH = 'search';
+const SHOW_LIST = 'showList';
+const SUBMIT = 'submit';
+
 
 function getRandomInt(max) {
-    return Math.floor(Math.random() * max);
+    return Math.floor(Math.random() * max); 
+ }
+
+// Class that constructs the properties and methods needed to handle movie information.
+ class Movie {
+    constructor(element) {
+        this.posterPath = element.poster_path;
+        this.nameInfo = element.name || element.title;
+        this.releaseInfo = element.first_air_date || element.release_date;
+        this.scoreInfo = element.vote_average.toFixed(1) * 10;
+        this.imageUrl = imageCardPath+this.posterPath;
+        this.posterUrl = posterPath+this.posterPath;
+        this.overview = element.overview;
+    }
+
+    showAsList(itemCard) {
+        itemCard.classList.add('movieCard');
+        itemCard.innerHTML =  `
+            <img src="${this.imageUrl}" class="image">
+            <div class="description">
+                <p class="movieName">${this.nameInfo}</p>
+                <p class="releaseInfo">${this.releaseInfo}</p>
+                <p class="scoreBox">${this.scoreInfo}<span>%</span></p>
+            </div>
+        `;
+        const box = itemCard.children[1].children[2];
+        paintBoxScore(this.scoreInfo, box);
+    }
+
+    showAsResult(itemCard) {
+        itemCard.classList.add('movie');
+        itemCard.innerHTML = `
+            <img class="poster" src="${this.posterUrl}">
+            <div class="dataMovie">
+                <div class="data">
+                    <p class="titleSearch">${this.nameInfo}</p>
+                    <p class="dateSearch">${this.releaseInfo}</p>
+                </div>
+                <div class="overview"> ${this.overview}</div>
+            </div>
+        `;
+    }
 }
 
 // It is in charged to found the movie.
-inputBar.addEventListener('submit', function(e) {
+inputBar.addEventListener(SUBMIT, function(e) {
     e.preventDefault();
     const name = inputBar[0].value;
     const nameCleaned = name.replace(/\s/g, '+');
@@ -29,7 +74,7 @@ inputBar.addEventListener('submit', function(e) {
     .then((data => {
 
         if (data.results.length) {
-            return renderResults(data.results, name);
+            return renderResults(data.results);
         } 
         renderMessage();
     })) 
@@ -46,32 +91,10 @@ const renderMessage = function() {
 }
 
 // Here is where the results of the searching are shown
-const renderResults = function(data, name) {
+const renderResults = function(data) {
     resultsDiv.classList.add('showContainer');
     resultsDiv.innerHTML = '';
-
-    data.forEach(element => {
-        const urlPath = element.poster_path;
-        const posterUrl = posterPath+urlPath;
-        const itemCard = document.createElement('div');
-        itemCard.classList.add('movie');
-
-        itemCard.innerHTML = `
-            <img class="poster" src="${posterUrl}">
-            <div class="dataMovie">
-                <div class="data">
-                    <p class="titleSearch">${element.title}</p>
-                    <p class="dateSearch">${element.release_date}</p>
-                </div>
-                <div class="overview"> ${element.overview}</div>
-            </div>
-        `;
-
-        const bar = document.getElementById('bar');
-        bar.placeholder = name;
-        resultsDiv.appendChild(itemCard);
-    })
-    
+    renderMoviesCards(data, 'containerResults', SEARCH);
  };
 
 // It is responsible for render the background of the search bar.
@@ -79,10 +102,10 @@ const updatedBackground = function() {
     fetch(latestWeekRelease)
     .then(response => response.json())
     .then((data) => {
-        let randomNumber = getRandomInt(data.results.length);
-        let result = data.results[randomNumber].backdrop_path;
-        let imageUrl = path+result;
-        let element = document.getElementById('pictures');
+        const randomNumber = getRandomInt(data.results.length);
+        const result = data.results[randomNumber].backdrop_path;
+        const imageUrl = path+result;
+        const element = document.getElementById('pictures');
         element.style.backgroundImage = "url("+ imageUrl +")";
     } )
 }();
@@ -99,36 +122,24 @@ const pageLogo = function() {
 };
 
 // This function renders the cards that are going to be show in the page.
-const renderMoviesCards = function(data, divElement) {
+const renderMoviesCards = function(data, divElement, result) {
     const divContainer = document.getElementById(divElement);
-    divContainer.innerHTML = ' ';
+    divContainer.innerHTML = '';
     
     data.forEach((element) => {
-
-        const posterPath = element.poster_path;
-        const nameInfo = element.name || element.title;
-        const releaseInfo = element.first_air_date || element.release_date;
-        const scoreInfo = element.vote_average.toFixed(1) * 10;
-        const imageUrl = imageCardPath+posterPath;
-
+        let newMovie = new Movie(element);
         const itemCard = document.createElement('div');
-        itemCard.classList.add('movieCard');
 
-        itemCard.innerHTML =  `
-            <img src="${imageUrl}" class="image">
-            <div class="description">
-                <p class="movieName">${nameInfo}</p>
-                <p class="releaseInfo">${releaseInfo}</p>
-                <p class="scoreBox">${scoreInfo+'%'}</p>
-            </div>
-        `;
+        if (result === SEARCH) {
+            newMovie.showAsResult(itemCard);
+        }
+
+        if (result === SHOW_LIST) {
+            newMovie.showAsList(itemCard);
+        }
 
         divContainer.appendChild(itemCard);
-    
-        const box = itemCard.children[1].children[2];
-        paintBoxScore(scoreInfo, box);
     });
-
 }
 
 // This function calls the API and get the response.
@@ -136,19 +147,19 @@ const renderTopMovies = function(latestDayRelease, divElement) {
     fetch(latestDayRelease)
     .then(response => response.json())
     .then((data) => {
-        renderMoviesCards(data.results, divElement);
+        renderMoviesCards(data.results, divElement, SHOW_LIST);
     });
 };
 
 // The call to the functions to load the list of movies and tv shows
-renderTopMovies(latestDayRelease, 'listContainer');
-renderTopMovies(trendingSeries, 'secondListContainer');
+renderTopMovies(latestDayRelease, 'listContainer', SHOW_LIST);
+renderTopMovies(trendingSeries, 'secondListContainer', SHOW_LIST);
 
 
 // This function paints the average box depending on the score.
 function paintBoxScore(value, element) {
     const isAverage = value > regularScore && value < highScore;
-    const isHighScore = value > highScore;
+    const isHighScore = value => highScore;
     const isBadScore = value <= regularScore;
 
     if (isHighScore) {
@@ -171,7 +182,7 @@ const newSelected = function(selected) {
     const optionsB = document.getElementById('secondOption');
 
     if (selected === 'b') {
-        renderTopMovies(latestWeekRelease, 'listContainer');
+        renderTopMovies(latestWeekRelease, 'listContainer', SHOW_LIST);
         if (!element.classList.contains('selectorRightMove')) {
             element.classList.add('selectorRightMove');
             optionsA.classList.replace('firstOptionMove', 'secondOptionMove');
@@ -185,7 +196,7 @@ const newSelected = function(selected) {
     }
     
     if (selected === 'a') {
-        renderTopMovies(latestDayRelease, 'listContainer');
+        renderTopMovies(latestDayRelease, 'listContainer', SHOW_LIST);
         element.classList.add('selectorLeftMove');
         optionsA.classList.replace('secondOptionMove', 'firstOptionMove');
         optionsB.classList.replace('firstOptionMove', 'secondOptionMove');
