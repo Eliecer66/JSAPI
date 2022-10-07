@@ -79,10 +79,10 @@ const updatedBackground = function() {
     fetch(latestWeekRelease)
     .then(response => response.json())
     .then((data) => {
-        let randomNumber = getRandomInt(data.results.length);
-        let result = data.results[randomNumber].backdrop_path;
-        let imageUrl = path+result;
-        let element = document.getElementById('pictures');
+        const randomNumber = getRandomInt(data.results.length);
+        const result = data.results[randomNumber].backdrop_path;
+        const imageUrl = path+result;
+        const element = document.getElementById('pictures');
         element.style.backgroundImage = "url("+ imageUrl +")";
     } )
 }();
@@ -101,7 +101,7 @@ const pageLogo = function() {
 // This function renders the cards that are going to be show in the page.
 const renderMoviesCards = function(data, divElement) {
     const divContainer = document.getElementById(divElement);
-    divContainer.innerHTML = ' ';
+    divContainer.innerHTML = '';
     
     data.forEach((element) => {
 
