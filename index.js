@@ -115,8 +115,8 @@ const pageLogo = function() {
     fetch(logo)
     .then(response => response.json())
     .then((data) => {
-        let imageUrl = path+data.belongs_to_collection.poster_path;
-        let updateLogo = document.getElementById('element');
+        const imageUrl = path+data.belongs_to_collection.poster_path;
+        const updateLogo = document.getElementById('element');
         updateLogo.innerHTML = `<img src="${imageUrl}"/>`
     })
 };
