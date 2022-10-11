@@ -65,8 +65,9 @@ body {
 }
 
 #pictures {
-    background-size: cover;
-    padding:  60px 0px;
+    background-size: contain;
+    padding: 80px 0px;
+    background-repeat: no-repeat;
 }
 
 #message {
@@ -75,7 +76,7 @@ body {
     font-size: 2em;
     display: flex;
     justify-content: space-between;
-    flex-wrap:wrap ;
+    flex-wrap: wrap;
 }
 
 #message h2 {
@@ -83,7 +84,7 @@ body {
 }
 
 #bar {
-    margin: 0px 0px 10px 31px;
+    margin: 0px 20px 10px 31px;
     border-radius: 12px;
     padding: 10px;
     font-size: 20px;
@@ -98,7 +99,7 @@ body {
     cursor: pointer;
     background-color: #0B173B;
     color: #FAFAFA;
-    transition:  1s;
+    transition: 1s;
 }
 
 #btn {
@@ -116,11 +117,76 @@ body {
     padding: 50px 25px;
 }
 
-.titleContainer {
-    font-size: 1.5em;
+#containerOtherMovies {
+    padding: 50px 25px;
+    color: #FAFAFA;
+    background: rgba(1, 12, 58, 0.92);
 }
 
-#listContainer {
+.titleContainer {
+    font-size: 1em;
+    display: flex;
+}
+
+.title {
+    margin-right: 20px;
+}
+
+/* Here goes the styles of some features to show other list of tops movies */
+
+.optionsTopRender {
+    position: relative;
+    display: flex;
+    border: thin #000000 solid;
+    justify-content: space-between;
+    border-radius: 30px;
+}
+
+.options {
+    padding: 4px 20px;
+}
+
+.option {
+    text-decoration: none;
+}
+
+#selector {
+    background-color: #0B173B;
+    position: absolute;
+    border-radius: 30px;
+    z-index: -1;
+}
+
+.selectorMove {
+    padding: 13.5px 46px;
+    position: 0;
+}
+
+.firstOptionMove {
+    color: #FAFAFA;
+    transition: 1s;
+}
+
+.secondOptionMove {
+    color: #000000;
+    transition: 1s;
+}
+
+.selectorRightMove {
+    left: 75px;
+    transition: 1s;
+    padding-left: 65px;
+}
+
+.selectorLeftMove {
+    left: 0px;
+    padding-left: 45px;
+    transition: 1s;
+}
+
+/* This styles are for the list of the top movies shows as cards */
+
+.listElements {
     display: flex;
     justify-content: space-between;
     overflow: scroll;
@@ -156,13 +222,24 @@ body {
     padding: 9px;
     margin: 5px;
     border-radius: 17%;
+    color: #000000;
+}
+
+.goodScore {
+    background-color: #58FA58;
+}
+
+.regularScore {
+    background-color: #F3F781;
+}
+
+.badScore {
+    background-color: #FA5858;
 }
 
 /* Here goes the styles for the responses of the search */
 
 #containerResults {
-    display: none;
-    background-color: #0B173B;
     padding: 100px;
     gap: 15px;
     flex-direction: column;
@@ -170,13 +247,18 @@ body {
     max-width: 1400px;
 }
 
+.hideBox {
+    display: none;
+}
+
+.showContainer {
+    display: flex;
+}
+
 .movie {
     display: flex;
-    border-style: solid;
-    border-width: thin;
+    border: thin solid #cecece;
     border-radius: 17px;
-    border-color: #cecece;
-
 }
 
 .poster {
