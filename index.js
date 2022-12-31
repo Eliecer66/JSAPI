@@ -125,7 +125,7 @@ const pageLogo = function() {
 const renderMoviesCards = function(data, divElement, result) {
     const divContainer = document.getElementById(divElement);
     divContainer.innerHTML = '';
-    
+
     data.forEach((element) => {
         const newMovie = new Movie(element);
         const itemCard = document.createElement('div');
