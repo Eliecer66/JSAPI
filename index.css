@@ -11,6 +11,14 @@ body {
 
 /* Header styles */
 
+.logo--style {
+    font-size: 1.7em;
+    font-family: Inter;
+    background: -webkit-linear-gradient(#00e7de,#FAFAFA);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
 .pageHeader {
     background: #0B173B ;
 }
@@ -30,29 +38,6 @@ body {
     padding: 8px;
 }
 
-#options {
-    padding: 2px 11px 1px 0px ;
-    flex-basis: 80%;
-}
-
-.optionsList {
-    display: flex;
-    color: #FAFAFA;
-    justify-content: end;
-    list-style: none;
-}
-
-#languageMenu {
-    background: transparent;
-    font-size: 16px;
-    color: #FAFAFA;
-}
-
-.language,
-.singIn {
-    margin: 10px;
-}
-
 /* Middle box */
 
 #middleBox {
@@ -65,7 +50,7 @@ body {
 }
 
 #pictures {
-    background-size: contain;
+    background-size: 100% 100%;
     padding: 80px 0px;
     background-repeat: no-repeat;
 }
@@ -75,8 +60,9 @@ body {
     color: #FAFAFA;
     font-size: 2em;
     display: flex;
-    justify-content: space-between;
+    justify-content: space-around;
     flex-wrap: wrap;
+    align-items: baseline;
 }
 
 #message h2 {
@@ -84,7 +70,7 @@ body {
 }
 
 #bar {
-    margin: 0px 20px 10px 31px;
+    margin: 0px 20px 10px 60px;
     border-radius: 12px;
     padding: 10px;
     font-size: 20px;
@@ -189,7 +175,7 @@ body {
 .listElements {
     display: flex;
     justify-content: space-between;
-    overflow: scroll;
+    overflow-x: scroll;
 }
 
 .movieCard {
@@ -198,6 +184,7 @@ body {
     height: auto;
     margin: 30px 5px 15px 6px;
     padding: 5px;
+    position: relative;
 }
 
 .image {
@@ -206,6 +193,7 @@ body {
     width: max-content;
     background-repeat: no-repeat;
     background-size: cover;
+    height: 300px;
 }
 
 .description {
@@ -217,34 +205,48 @@ body {
     align-items: center;
 }
 
+.movieName {
+    font-weight: 700;
+    font-family: Inter;
+}
+
 .scoreBox {
-    background-color: #2196F3 ;
-    padding: 9px;
+    background-color: #000000;
+    border-radius: 50%;
+    color: #FAFAFA;
+    font-size: 0.9em;
+    font-weight: bolder;
+    left: 144px;
     margin: 5px;
-    border-radius: 17%;
-    color: #000000;
+    position: absolute;
+    width: 43px;
+    padding: 10px 6px;
+    top: 263px;
 }
 
 .goodScore {
-    background-color: #58FA58;
+    border: #06ba06 solid;
 }
 
 .regularScore {
-    background-color: #F3F781;
+    border: #eeff00 solid;
 }
 
 .badScore {
-    background-color: #FA5858;
+    border: #e70808 solid;
+}
+
+.scoreBox span {
+    font-size: 0.8em;
 }
 
 /* Here goes the styles for the responses of the search */
 
 #containerResults {
-    padding: 100px;
-    gap: 15px;
-    flex-direction: column;
+    padding: 30px;
     margin: 0 auto;
     max-width: 1400px;
+    flex-wrap: wrap;
 }
 
 .hideBox {
@@ -257,21 +259,19 @@ body {
 
 .movie {
     display: flex;
-    border: thin solid #cecece;
     border-radius: 17px;
+    width: 25%;
+    margin-top: 60px;
 }
 
 .poster {
     border-radius: 12px;
-    padding: 71px 50px;
     background-repeat: no-repeat;
     background-size: cover;
 }
 
 .dataMovie {
     margin: 10px;
-    padding: 5px;
-    width: 100%;
 }
 
 .data {
@@ -290,10 +290,12 @@ body {
 .overview {
     overflow: hidden;
     word-wrap: break-word;
+    margin-top: 50px;
+    font-size: 0.9em;
     text-overflow: ellipsis;
     display: -webkit-box;
-   -webkit-line-clamp: 2; /* number of lines to show */
-           line-clamp: 2; 
+   -webkit-line-clamp: 5; /* number of lines to show */
+           line-clamp: 5; 
    -webkit-box-orient: vertical;
 }
 
