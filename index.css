@@ -11,6 +11,14 @@ body {
 
 /* Header styles */
 
+.logo--style {
+    font-size: 1.7em;
+    font-family: Inter;
+    background: -webkit-linear-gradient(#00e7de,#FAFAFA);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
 .pageHeader {
     background: #0B173B ;
 }
@@ -28,29 +36,6 @@ body {
 #logo {
     flex-basis: 20%;
     padding: 8px;
-}
-
-#options {
-    padding: 2px 11px 1px 0px ;
-    flex-basis: 80%;
-}
-
-.optionsList {
-    display: flex;
-    color: #FAFAFA;
-    justify-content: end;
-    list-style: none;
-}
-
-#languageMenu {
-    background: transparent;
-    font-size: 16px;
-    color: #FAFAFA;
-}
-
-.language,
-.singIn {
-    margin: 10px;
 }
 
 /* Middle box */
@@ -75,8 +60,9 @@ body {
     color: #FAFAFA;
     font-size: 2em;
     display: flex;
-    justify-content: space-between;
+    justify-content: space-around;
     flex-wrap: wrap;
+    align-items: baseline;
 }
 
 #message h2 {
@@ -84,7 +70,7 @@ body {
 }
 
 #bar {
-    margin: 0px 20px 10px 31px;
+    margin: 0px 20px 10px 60px;
     border-radius: 12px;
     padding: 10px;
     font-size: 20px;
@@ -189,7 +175,7 @@ body {
 .listElements {
     display: flex;
     justify-content: space-between;
-    overflow: scroll;
+    overflow-x: scroll;
 }
 
 .movieCard {
@@ -207,6 +193,7 @@ body {
     width: max-content;
     background-repeat: no-repeat;
     background-size: cover;
+    height: 300px;
 }
 
 .description {
@@ -218,15 +205,21 @@ body {
     align-items: center;
 }
 
+.movieName {
+    font-weight: 700;
+    font-family: Inter;
+}
+
 .scoreBox {
-    background-color: #000000bb;
+    background-color: #000000;
     border-radius: 50%;
     color: #FAFAFA;
     font-size: 0.9em;
     font-weight: bolder;
-    left: 18px;
+    left: 144px;
     margin: 5px;
     position: absolute;
+    width: 43px;
     padding: 10px 6px;
     top: 263px;
 }
@@ -236,11 +229,11 @@ body {
 }
 
 .regularScore {
-    border: #eeff00fd solid;
+    border: #eeff00 solid;
 }
 
 .badScore {
-    border: #e70808fd solid;
+    border: #e70808 solid;
 }
 
 .scoreBox span {

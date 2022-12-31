@@ -106,7 +106,7 @@ const updatedBackground = function() {
         const result = data.results[randomNumber].backdrop_path;
         const imageUrl = path+result;
         const element = document.getElementById('pictures');
-        element.style.backgroundImage = "url("+ imageUrl +")";
+        element.style.backgroundImage = `url(${imageUrl})`;
     } )
 }();
  
@@ -115,8 +115,8 @@ const pageLogo = function() {
     fetch(logo)
     .then(response => response.json())
     .then((data) => {
-        let imageUrl = path+data.belongs_to_collection.poster_path;
-        let updateLogo = document.getElementById('element');
+        const imageUrl = path+data.belongs_to_collection.poster_path;
+        const updateLogo = document.getElementById('element');
         updateLogo.innerHTML = `<img src="${imageUrl}"/>`
     })
 };
@@ -127,7 +127,7 @@ const renderMoviesCards = function(data, divElement, result) {
     divContainer.innerHTML = '';
     
     data.forEach((element) => {
-        let newMovie = new Movie(element);
+        const newMovie = new Movie(element);
         const itemCard = document.createElement('div');
 
         if (result === SEARCH) {
